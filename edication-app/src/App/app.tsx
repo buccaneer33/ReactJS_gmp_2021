@@ -1,18 +1,23 @@
 import React from 'react';
-import SimpleComponent from './simple.component';
-import PureComponent from './pure.component';
-import ListComponent from './list.component';
+import { SimpleComponent } from './simple.component';
+import { PureComponent } from './pure.component';
+import { ListComponent } from './list.component';
+import { Greatings } from '../arrow-function.component/arrow-function.component';
 
-function App() {
+const pageHeader =  React.createElement(
+    'h1',
+    { className: 'headerTitle' },
+    'Hello, World!'
+)
+
+export function App() {
     return (
         <div className="AppComponent">
-            <header id="header"/>
-            <div id="greating" />
+            { pageHeader }
+            <Greatings />
             <SimpleComponent />
             <PureComponent />
             <ListComponent />
         </div>
     );
 };
-
-export default App;
