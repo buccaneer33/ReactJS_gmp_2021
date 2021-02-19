@@ -7,7 +7,7 @@ export class ListComponent extends React.Component {
     render () {
         return (
             <ul> {
-                this.simpleArray.map( (value, index) => <li key={ index }>{ value }</li> )
+                this.simpleArray.map((value, index) => <li key={index}>{value}</li>)
             } </ul>
         )
     }
