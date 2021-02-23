@@ -20,4 +20,4 @@ export function App() {
             <ListComponent />
         </div>
     );
-};
+}
