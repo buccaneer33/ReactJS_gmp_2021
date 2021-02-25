@@ -3,18 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require("eslint-webpack-plugin");
-const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-    mode: isDevelopment ? 'development' : 'production',
+    mode: process.env.NODE_ENV,
     entry: ['./src/index.tsx', './src/index.scss', './src/js/index.js'],
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: {
-                    loader: 'babel-loader'
-                },
+                use: { loader: 'babel-loader' },
                 exclude: /node_modules/,
             },
             {
@@ -42,7 +39,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: isDevelopment ? '[name].js' : '[name].[hash].js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
@@ -75,8 +72,7 @@ module.exports = {
     ],
     devServer: {
         overlay: true,
-        open: true,
         port: 3000,
-        contentBase: path.resolve(__dirname, './dist')
+        hot: true,
     }
 };
