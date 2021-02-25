@@ -6,7 +6,7 @@ import { Greatings } from '../arrow-function.component/arrow-function.component'
 
 const pageHeader =  React.createElement(
     'h1',
-    { className: 'headerTitle' },
+    {className: 'headerTitle'},
     'Hello, World!'
 )
 
@@ -20,4 +20,4 @@ export function App() {
             <ListComponent />
         </div>
     );
-};
+}
