@@ -1,23 +1,13 @@
 import React from 'react';
-import { SimpleComponent } from './simple.component';
-import { PureComponent } from './pure.component';
-import { ListComponent } from './list.component';
-import { Greatings } from '../arrow-function.component/arrow-function.component';
+import {useStyles} from './styles';
+import {HomeComponent} from '../pages/home/home.component';
 
-const pageHeader =  React.createElement(
-    'h1',
-    {className: 'headerTitle'},
-    'Hello, World!'
-)
+const {classes} = useStyles.attach();
 
-export function App() {
+export function App():JSX.Element {
     return (
-        <div className="AppComponent">
-            { pageHeader }
-            <Greatings />
-            <SimpleComponent />
-            <PureComponent />
-            <ListComponent />
+        <div className={classes.AppComponent}>
+            <HomeComponent />
         </div>
     );
 }
