@@ -12,7 +12,7 @@ export class HomeComponent extends React.Component {
         return (
             <div className={classes.homePage}>
                 <HeaderComponent />
-                <MoviesComponent />
+                    <MoviesComponent />
                 <FooterComponent />
             </div>
         );

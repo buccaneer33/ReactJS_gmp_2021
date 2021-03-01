@@ -22,3 +22,7 @@ export interface Button {
         borderRadius?: string;
     }
 }
+
+export interface MoviesArray {
+    moviesInfo: MovieCard[];
+}
