@@ -1,6 +1,6 @@
 import {jss} from 'react-jss'
 
-export const useStyles = jss.createStyleSheet({
+export const stylesList = jss.createStyleSheet({
     movies: {
         display: 'flex',
         flexDirection: 'column',

@@ -1,12 +1,12 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {MoviesCounterComponent} from '../moviesCounter/moviesCounter.component';
 import {moviePreviewStub} from '../../appStubs/moviePreviewStub';
 import {MovieItemComponent} from '../movieItem/movieItem.component';
-import ErrorBoundary from '../../components/errorBoundary/errorBoundary.component';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary.component';
 
-const {classes} = useStyles.attach();
+const {classes} = stylesList.attach();
 
 export class MoviesComponent extends React.Component {
     render (): JSX.Element {
@@ -16,7 +16,7 @@ export class MoviesComponent extends React.Component {
                 <ErrorBoundary>
                     <MoviesCounterComponent moviesInfo={moviePreviewStub}/> 
                     <div className={classes.moviesBlock}>
-                        {moviePreviewStub.map((item, index) => <MovieItemComponent key={index} {...item}/>)}
+                        {moviePreviewStub.map((item) => <MovieItemComponent key={item.id} {...item}/>)}
                     </div>
                 </ErrorBoundary>
             </div>

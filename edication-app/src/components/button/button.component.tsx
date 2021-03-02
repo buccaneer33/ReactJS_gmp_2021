@@ -1,8 +1,8 @@
 import React from 'react';
 import {createUseStyles} from 'react-jss';
-import {Button} from '../../common/interfaces/ApiDataInterface';
+import {ButtonProps} from '../../common/interfaces/ApiDataInterface';
 
-const useStyles = createUseStyles({
+const stylesList = createUseStyles({
     myButton: props => ({
       padding: props.spacing,
       border: props.border,
@@ -17,8 +17,8 @@ const useStyles = createUseStyles({
     })
   })
 
-const ButtonComponent = (props: Button): JSX.Element => {
-    const classes = useStyles(props.rules)
+const ButtonComponent = (props: ButtonProps): JSX.Element => {
+    const classes = stylesList(props.rules)
     return (
         <button className={classes.myButton}>
             <span className={classes.myLabel}>{props.label}</span>

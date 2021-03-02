@@ -1,15 +1,13 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 
-function ErrorBoundary(props: JSX.ElementChildrenAttribute): JSX.Element {
-    const classes = useStyles();
-    const error = () => (
-        <h2 className={classes.error}>
-            Something went wrong
-        </h2>
-    );
+export const ErrorBoundary = (props: JSX.ElementChildrenAttribute): JSX.Element => {
+    const classes = stylesList();
     const isEverythingOk = true;
 
-    return <>{isEverythingOk ? props.children : <>{error()}</>} </>
+    return isEverythingOk 
+        ? <>{props.children}</>
+        : <><h2 className={classes.error}>
+            Something went wrong
+        </h2></>
 }
-export default ErrorBoundary

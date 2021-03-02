@@ -1,9 +1,9 @@
 import React from 'react';
-import {useStyles} from './styles';
-import { MoviesArray } from '../../common/interfaces/ApiDataInterface';
+import {stylesList} from './styles';
+import { MoviesData } from '../../common/interfaces/ApiDataInterface';
 
-export const MoviesCounterComponent = (props:MoviesArray): JSX.Element => {
-    const classes = useStyles();
+export const MoviesCounterComponent = (props:MoviesData): JSX.Element => {
+    const classes = stylesList();
     return (
         <div className={classes.block}>{props.moviesInfo.length}<span> movies found</span></div>
     );

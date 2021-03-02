@@ -1,9 +1,9 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 import {MovieCard} from '../../common/interfaces/ApiDataInterface';
 
 export const MovieItemComponent = (card: MovieCard): JSX.Element => {
-    const classes = useStyles();
+    const classes = stylesList();
     return (
         <div className={classes.movieItem}>
             <img className={classes.movieImg} alt={card.title} src={card.movieCardUrl} />

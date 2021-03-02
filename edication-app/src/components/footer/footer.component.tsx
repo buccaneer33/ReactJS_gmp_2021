@@ -1,8 +1,8 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 import {LogoComponent} from '../logo/logo.component';
 
-const {classes} = useStyles.attach();
+const {classes} = stylesList.attach();
 
 export class FooterComponent extends React.Component {
     render (): JSX.Element {

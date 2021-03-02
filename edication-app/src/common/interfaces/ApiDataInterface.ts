@@ -10,7 +10,7 @@ export interface MovieCard {
     movieCardUrl: string;
 }
 
-export interface Button {
+export interface ButtonProps {
     label?: string;
     rules: {
         spacing: string;
@@ -23,6 +23,6 @@ export interface Button {
     }
 }
 
-export interface MoviesArray {
+export interface MoviesData {
     moviesInfo: MovieCard[];
 }

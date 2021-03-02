@@ -1,6 +1,6 @@
-import { Button } from '../../common/interfaces/ApiDataInterface';
+import { ButtonProps } from '../../common/interfaces/ApiDataInterface';
 
-export const addMovieButton: Button = {
+export const addMovieButton: ButtonProps = {
     label: '+add Movie',
     rules: {
         spacing: '5px 15px',

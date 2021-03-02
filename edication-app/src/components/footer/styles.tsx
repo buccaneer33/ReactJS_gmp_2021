@@ -1,6 +1,6 @@
 import {jss} from 'react-jss'
 
-export const useStyles = jss.createStyleSheet({
+export const stylesList = jss.createStyleSheet({
     footer: {
         display: 'flex',
         flexDirection: 'row',

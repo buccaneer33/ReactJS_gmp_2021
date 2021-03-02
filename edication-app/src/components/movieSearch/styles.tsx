@@ -1,6 +1,6 @@
 import {createUseStyles} from 'react-jss'
 
-export const useStyles = createUseStyles({
+export const stylesList = createUseStyles({
     title: {
         color: '#FFFFFF',
         fontSize: '40px',

@@ -1,6 +1,6 @@
-import { Button } from '../../common/interfaces/ApiDataInterface';
+import {ButtonProps} from '../../common/interfaces/ApiDataInterface';
 
-export const searchButton: Button = {
+export const searchButton: ButtonProps = {
     label: 'search',
     rules: {
         spacing: '10px',

@@ -1,10 +1,10 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 import {HomeComponent} from '../pages/home/home.component';
 
-const {classes} = useStyles.attach();
+const {classes} = stylesList.attach();
 
-export function App():JSX.Element {
+export const App: React.FC = () => {
     return (
         <div className={classes.AppComponent}>
             <HomeComponent />

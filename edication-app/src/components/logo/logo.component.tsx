@@ -1,8 +1,8 @@
 import React from 'react';
-import {useStyles} from './styles';
+import {stylesList} from './styles';
 
-export const LogoComponent = (): JSX.Element => {
-    const classes = useStyles();
+export const LogoComponent: React.FC = () => {
+    const classes = stylesList();
     return (
         <div className={classes.logo}>
             <strong>netflix</strong>roulette
