@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 import {stylesList} from './styles';
 
-export const ErrorBoundary = (props: JSX.ElementChildrenAttribute): JSX.Element => {
-    const classes = stylesList();
-    const isEverythingOk = true;
+const {classes} = stylesList.attach();
 
-    return isEverythingOk 
-        ? <>{props.children}</>
-        : <><h2 className={classes.error}>
-            Something went wrong
-        </h2></>
+interface Props {
+    children: ReactNode;
+}
+export class ErrorBoundary extends React.Component {
+    isEverythingOk: boolean
+
+    constructor(props: Props) {
+        super(props);
+        this.isEverythingOk = true;
+    }
+
+    static getDerivedStateFromError(error: Error): void {
+        // Обновить состояние с тем, чтобы следующий рендер показал запасной UI.
+      }
+
+    public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+        console.log(error, errorInfo);
+    }
+
+    render (): JSX.Element {
+        return (
+            this.isEverythingOk 
+            ? <>{this.props.children}</>
+            : <><h2 className={classes.error}>Something went wrong</h2></>
+        );
+    }
 }

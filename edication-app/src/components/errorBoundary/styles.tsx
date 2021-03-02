@@ -1,6 +1,6 @@
-import {createUseStyles} from 'react-jss'
+import {jss} from 'react-jss'
 
-export const stylesList = createUseStyles({
+export const stylesList = jss.createStyleSheet({
     error: {
         height: '25px',
         color: '#F65261',
