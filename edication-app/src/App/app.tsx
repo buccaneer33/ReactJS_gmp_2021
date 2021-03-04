@@ -1,23 +1,13 @@
 import React from 'react';
-import { SimpleComponent } from './simple.component';
-import { PureComponent } from './pure.component';
-import { ListComponent } from './list.component';
-import { Greatings } from '../arrow-function.component/arrow-function.component';
+import {stylesList} from './styles';
+import {HomeComponent} from '../pages/home/home.component';
 
-const pageHeader =  React.createElement(
-    'h1',
-    {className: 'headerTitle'},
-    'Hello, World!'
-)
+const {classes} = stylesList.attach();
 
-export function App() {
+export const App: React.FC = () => {
     return (
-        <div className="AppComponent">
-            { pageHeader }
-            <Greatings />
-            <SimpleComponent />
-            <PureComponent />
-            <ListComponent />
+        <div className={classes.AppComponent}>
+            <HomeComponent />
         </div>
     );
 }
