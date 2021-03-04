@@ -26,5 +26,14 @@ export const stylesList = jss.createStyleSheet({
         flexDirection: 'column',
         flexGrow: '1',
         padding: '25px'
+    },
+    button: {
+        padding: '5px 15px',
+        color: '#F65261',
+        fontSize: '19px',
+        backgroundColor: 'rgba(85, 85, 85, 0.7)',
+        textTransform: 'uppercase',
+        border: '1px solid transparent',
+        borderRadius: '5px'
     }
 });

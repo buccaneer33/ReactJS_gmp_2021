@@ -19,6 +19,15 @@ export const stylesList = createUseStyles({
         width: '600px',
         padding: '5px 10px',
         fontSize: '24px'
+    },
+    button: {
+        padding: '10px',
+        color: '#FFFFFF',
+        fontSize: '24px',
+        backgroundColor: '#F65261',
+        textTransform: 'uppercase',
+        border: '1px solid #F65261',
+        borderRadius: '5px'
     }
 });
 

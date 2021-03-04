@@ -10,19 +10,6 @@ export interface MovieCard {
     movieCardUrl: string;
 }
 
-export interface ButtonProps {
-    label?: string;
-    rules: {
-        spacing: string;
-        labelColor: string;
-        fontSize: string;
-        border?: string;
-        backgroundColor?: string;
-        textTransform?: string;
-        borderRadius?: string;
-    }
-}
-
 export interface MoviesData {
     moviesInfo: MovieCard[];
 }
