@@ -17,7 +17,6 @@ export class HeaderComponent extends React.Component {
         super(props);
     }
 
-
     render (): JSX.Element {
         return (
             <div className={classes.header}>

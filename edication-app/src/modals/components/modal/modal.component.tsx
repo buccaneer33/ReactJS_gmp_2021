@@ -18,17 +18,17 @@ export class ModalComponent extends React.Component {
         this.state = {
             isShown: false
         };
-        console.log(this.props);
+        // console.log(this.props);
         this.component = this.getModal(this.props.modalProps.class)
     }
 
-    closeModal = () => {
+    closeModal = (): void => {
         this.setState({ isShown: false });
     };
-    showModal = () => {
+    showModal = (): void => {
         this.setState({ isShown: true });
     };
-    getModal(type) {
+    getModal(type): void {
         if (this.MODAL_TYPES.hasOwnProperty(type)) {
             return this.MODAL_TYPES[type];
         }
@@ -44,6 +44,5 @@ export class ModalComponent extends React.Component {
             ?  <this.component closeModal={this.closeModal} />
             : <React.Fragment/>}
         </React.Fragment>
-        /**   */
     }
 }

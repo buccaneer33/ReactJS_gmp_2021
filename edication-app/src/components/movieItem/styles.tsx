@@ -1,6 +1,6 @@
-import {createUseStyles} from 'react-jss'
+import {jss} from 'react-jss'
 
-export const stylesList = createUseStyles({
+export const stylesList = jss.createStyleSheet({
     movieItem: {
         display: 'flex',
         flexDirection: 'column',
@@ -31,7 +31,7 @@ export const stylesList = createUseStyles({
         height: '100px',
         backgroundColor: '#232323',
         right: '22px',
-        top: '22px',
+        top: '70px',
         paddingTop: '25px'
     },
     menuButton: {

@@ -7,7 +7,6 @@ export class ModalTriggerComponent extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
 
     render(): JSX.Element {
