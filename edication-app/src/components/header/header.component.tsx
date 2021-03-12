@@ -7,12 +7,13 @@ import {ModalComponent} from '../../modals/components/modal/modal.component';
 
 const {classes} = stylesList.attach();
 
-export class HeaderComponent extends React.Component {
-
-    modalProps = {
+const modalProps = {
         triggerText: '+add movie',
         class: 'addMovie'
     }
+
+export class HeaderComponent extends React.Component {
+
     constructor(props) {
         super(props);
     }
@@ -23,7 +24,7 @@ export class HeaderComponent extends React.Component {
                 <div className={classes.headerUpper}>
                     <LogoComponent />
                     <div>
-                        <ModalComponent modalProps={this.modalProps} />
+                        <ModalComponent modalProps={modalProps} />
                     </div>
                 </div>
                 <div className={classes.headerMain}>

@@ -7,9 +7,14 @@ const editModalProps = {
     triggerText: 'edit',
     class: 'editMovie'
 }
-const delModalProps = {
+const confirmProps = {
     triggerText: 'delete',
-    class: 'delMovie'
+    class: 'confirm',
+    content: 'Are you sure you want to delete this movie',
+    buttons: {
+        yes: true,
+        no: true
+    }
 }
 
 const {classes} = stylesList.attach();
@@ -23,18 +28,18 @@ export class MovieItemComponent extends React.Component {
         };
     }
 
-    showTolltip = (): void => {
+    toggleTolltip = (): void => {
         this.setState({isShown: !this.state.isShown})
     }
 
     render (): JSX.Element {
         return (
             <div className={classes.movieItem}>
-                <div onClick={this.showTolltip} className={classes.control}></div>
+                <div onClick={this.toggleTolltip} className={classes.control}></div>
                 { this.state.isShown &&
                     <div className={classes.menu}>
                         <ModalComponent modalProps={editModalProps} />
-                        <ModalComponent modalProps={delModalProps} />
+                        <ModalComponent modalProps={confirmProps} />
                     </div>
                 }
                 <img className={classes.movieImg} alt={this.props.title} src={this.props.movieCardUrl} />

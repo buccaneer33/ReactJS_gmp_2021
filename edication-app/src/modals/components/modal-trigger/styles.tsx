@@ -23,7 +23,7 @@ export const stylesList = jss.createStyleSheet({
             backgroundColor: '#F65261',
         }
     },
-    delMovie: {
+    confirm: {
         display: 'block',
         width: '100%',
         height: '50px',

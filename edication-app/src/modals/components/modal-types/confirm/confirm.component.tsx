@@ -4,7 +4,12 @@ import {stylesList} from '../styles';
 
 const {classes} = stylesList.attach();
 
-export class DeleteMovieComponent extends React.Component {
+export class ConfirmComponent extends React.Component {
+
+    constructor(props: React.Component) {
+        super(props);
+        console.log(this.props);
+    }
 
     render(): JSX.Element {
         return ReactDOM.createPortal(
@@ -20,11 +25,14 @@ export class DeleteMovieComponent extends React.Component {
                     </div>
                     <div className={classes.modalBody}>
                         <div className={classes.inputItem}>
-                            <label className={classes.inputLabel}>Are you sure you want to delete this movie</label>
+                            <label className={classes.inputLabel}>{this.props.content.content}</label>
                         </div>
                     </div>
                     <div className={classes.modalFooter}>
-                        <button className={classes.submitButton}>confirm</button>
+                        {this.props.content.buttons.yes &&
+                            <><button className={classes.submitButton}>confirm</button></>}
+                        {this.props.content.buttons.no &&
+                            <><button onClick={this.props.closeModal} className={classes.submitButton}>close</button></>}
                     </div>
                 </div>
             </aside>,
