@@ -1,6 +1,6 @@
-import {createUseStyles} from 'react-jss'
+import {jss} from 'react-jss'
 
-export const stylesList = createUseStyles({
+export const stylesList = jss.createStyleSheet({
     movieItem: {
         display: 'flex',
         flexDirection: 'column',
@@ -11,7 +11,41 @@ export const stylesList = createUseStyles({
         color: 'rgba(255, 255, 255, 0.5)',
         fontSize: '19px',
         boxSizing: 'border-box',
-        padding: '15px'
+        padding: '15px',
+        position: 'relative'
+    },
+    control: {
+        position: 'absolute',
+        width: '35px',
+        height: '35px',
+        borderRadius: '50%',
+        top: '4%',
+        right: '6%',
+        border: '2px solid rgba(255, 255, 255, 0.5)',
+        color: 'rgba(255, 255, 255, 0.5)',
+    },
+    menu: {
+        display: 'block',
+        position: 'absolute',
+        width: '160px',
+        height: '100px',
+        backgroundColor: '#232323',
+        right: '22px',
+        top: '70px',
+        paddingTop: '25px'
+    },
+    menuButton: {
+        display: 'block',
+        width: '160px',
+        height: '50px',
+        backgroundColor: '#232323',
+        color: '#FFFFFF',
+        fontSize: '19px',
+        border: "none",
+
+        '&:hover': {
+            backgroundColor: '#F65261',
+        }
     },
     movieImg: {
         width: '100%',

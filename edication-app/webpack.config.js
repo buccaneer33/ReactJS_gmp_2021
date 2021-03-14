@@ -32,7 +32,13 @@ module.exports = {
                           outputPath: '',
                           context: path.resolve(__dirname, './')}
                   }
-              }
+            },
+            {test: /\.(png|jpg|gif|svg|webp)$/,
+                use: 
+                  {loader: 'file-loader', options: {name: './img/[name].[ext]',
+                    context: path.resolve(__dirname, './img')}
+                    }
+              },
         ],
     },
     resolve: {
