@@ -1,36 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {stylesList} from './styles';
 
 import {LogoComponent} from '../logo/logo.component';
 import {MovieSearchComponent} from '../movieSearch/movieSearch.component';
-import {ModalComponent} from '../../modals/components/modal/modal.component';
+import {AddMovieComponent} from '../modals/add-movie/add-movie.component';
 
-const {classes} = stylesList.attach();
+export const HeaderComponent: React.FC = (): JSX.Element => {
 
-const modalProps = {
-        triggerText: '+add movie',
-        class: 'addMovie'
-    }
+    const classes = stylesList();
 
-export class HeaderComponent extends React.Component {
+    const [modalState, setState] = useState(false);
 
-    constructor(props) {
-        super(props);
-    }
-
-    render (): JSX.Element {
-        return (
-            <div className={classes.header}>
-                <div className={classes.headerUpper}>
-                    <LogoComponent />
-                    <div>
-                        <ModalComponent modalProps={modalProps} />
-                    </div>
-                </div>
-                <div className={classes.headerMain}>
-                    <MovieSearchComponent />
-                </div>
+    return (
+        <div className={classes.header}>
+            <div className={classes.headerUpper}>
+                <LogoComponent />
+                <button className={classes.button} onClick={() => setState(true)}>+Add Movie</button>
             </div>
-        );
-    }
+            <div className={classes.headerMain}>
+                <MovieSearchComponent />
+            </div>
+            { modalState && <AddMovieComponent closeModal={() => setState(false)}/> }
+        </div>
+    );
 }

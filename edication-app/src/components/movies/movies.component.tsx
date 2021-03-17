@@ -2,24 +2,27 @@ import React from 'react';
 import {stylesList} from './styles';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {MoviesCounterComponent} from '../moviesCounter/moviesCounter.component';
-import {moviePreviewStub} from '../../appStubs/moviePreviewStub';
 import {MovieItemComponent} from '../movieItem/movieItem.component';
 import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary.component';
+import {MovieCard} from '../../common/interfaces/ApiDataInterface';
 
-const {classes} = stylesList.attach();
+interface MoviesProps {
+    movies: MovieCard[];
+}
 
-export class MoviesComponent extends React.Component {
-    render (): JSX.Element {
-        return (
-            <div className={classes.movies}>
-                <NavigationComponent />
-                <ErrorBoundary>
-                    <MoviesCounterComponent moviesInfo={moviePreviewStub}/> 
-                    <div className={classes.moviesBlock}>
-                        {moviePreviewStub.map((item) => <MovieItemComponent key={item.id} {...item}/>)}
-                    </div>
-                </ErrorBoundary>
-            </div>
-        );
-    }
+export const MoviesComponent: React.FC <MoviesProps> = ({movies}: MoviesProps): JSX.Element => {
+
+    const classes = stylesList();
+
+    return (
+        <div className={classes.movies}>
+            <NavigationComponent />
+            <ErrorBoundary>
+                <MoviesCounterComponent moviesCount={movies.length}/> 
+                <div className={classes.moviesBlock}>
+                    {movies.map((item) => <MovieItemComponent key={item.id} movieCard={item}/>)}
+                </div>
+            </ErrorBoundary>
+        </div>
+    );
 }

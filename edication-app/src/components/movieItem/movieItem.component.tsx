@@ -1,15 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {stylesList} from './styles';
 import {MovieCard} from '../../common/interfaces/ApiDataInterface';
-import {ModalComponent} from '../../modals/components/modal/modal.component';
+import {EditMovieComponent} from '../modals/edit-movie/edit-movie.component';
+import {ConfirmComponent} from '../modals/confirm/confirm.component';
+import {ConfirmProps} from '../../common/interfaces/ApiDataInterface';
 
-const editModalProps = {
-    triggerText: 'edit',
-    class: 'editMovie'
-}
-const confirmProps = {
-    triggerText: 'delete',
-    class: 'confirm',
+const confirmProps: ConfirmProps = {
     content: 'Are you sure you want to delete this movie',
     buttons: {
         yes: true,
@@ -17,40 +13,41 @@ const confirmProps = {
     }
 }
 
-const {classes} = stylesList.attach();
+interface MovieProps {
+    movieCard: MovieCard;
+}
 
-export class MovieItemComponent extends React.Component {
+export const MovieItemComponent: React.FC <MovieProps> = ({movieCard}: MovieProps): JSX.Element => {
 
-    constructor(props: MovieCard) {
-        super(props);
-        this.state = {
-            isShown: false
-        };
+    const classes = stylesList();
+
+    const [showEdit, setEditState] = useState(false);
+    const [showDel, setDelState] = useState(false);
+    const [showTolltip, setTolltip] = useState(false);
+
+    const toggleTolltip = (): void => {
+        setTolltip(!showTolltip)
     }
 
-    toggleTolltip = (): void => {
-        this.setState({isShown: !this.state.isShown})
-    }
-
-    render (): JSX.Element {
-        return (
-            <div className={classes.movieItem}>
-                <div onClick={this.toggleTolltip} className={classes.control}></div>
-                { this.state.isShown &&
-                    <div className={classes.menu}>
-                        <ModalComponent modalProps={editModalProps} />
-                        <ModalComponent modalProps={confirmProps} />
-                    </div>
-                }
-                <img className={classes.movieImg} alt={this.props.title} src={this.props.movieCardUrl} />
-                <div className={classes.titleBlock}>
-                    <span className={classes.title}>{this.props.title}</span>
-                    <span className={classes.date}>{this.props.releaseDate}</span>
+    return (<>
+        <div className={classes.movieItem}>
+            <div onClick={toggleTolltip} className={classes.control}></div>
+            { showTolltip &&
+                <div className={classes.menu}>
+                    <button onClick={() => setEditState(true)} className={classes.menuButton}>Edit movie</button>
+                    <button onClick={() => setDelState(true)} className={classes.menuButton}>delete movie</button>
                 </div>
-                <div className={classes.ganre}>
-                    {this.props.ganre}
-                </div>
+            }
+            <img className={classes.movieImg} alt={movieCard.title} src={movieCard.movieCardUrl} />
+            <div className={classes.titleBlock}>
+                <span className={classes.title}>{movieCard.title}</span>
+                <span className={classes.date}>{movieCard.releaseDate}</span>
             </div>
-        );
-    }
+            <div className={classes.ganre}>
+                {movieCard.ganre}
+            </div>
+        </div>
+        { showEdit && <EditMovieComponent closeModal={() => setEditState(false)}/> }
+        { showDel && <ConfirmComponent closeModal={() => setDelState(false)} modalProps={confirmProps}/> }
+    </>);
 }

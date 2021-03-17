@@ -10,6 +10,11 @@ export interface MovieCard {
     movieCardUrl: string;
 }
 
-export interface MoviesData {
-    moviesInfo: MovieCard[];
+export interface ConfirmProps {
+    content: string,
+    buttons: {
+        yes?: boolean,
+        no?: boolean,
+        ok?: boolean,
+    }
 }

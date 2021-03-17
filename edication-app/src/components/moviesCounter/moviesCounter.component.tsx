@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {stylesList} from './styles';
-import { MoviesData } from '../../common/interfaces/ApiDataInterface';
 
-export const MoviesCounterComponent = (props:MoviesData): JSX.Element => {
+interface CountProps {
+    moviesCount: number;
+}
+export const MoviesCounterComponent: React.FC <CountProps> = ({moviesCount}: CountProps): JSX.Element => {
     const classes = stylesList();
-    return (
-        <div className={classes.block}>{props.moviesInfo.length}<span> movies found</span></div>
-    );
+
+    const [count] = useState(moviesCount);
+
+    return (<div className={classes.block}>{count}<span> movies found</span></div>);
 }

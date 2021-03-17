@@ -1,7 +1,7 @@
 import {createUseStyles} from 'react-jss'
 
 export const stylesList = createUseStyles({
-    homePage: {
+    detailsPage: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
