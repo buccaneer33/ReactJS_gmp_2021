@@ -1,9 +1,9 @@
 import React from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 import {LogoComponent} from '../logo/logo.component';
 
 export const FooterComponent: React.FC = (): JSX.Element => {
-    const classes = stylesList();
+    const classes = useStyles();
     return (
         <div className={classes.footer}>
             <LogoComponent />

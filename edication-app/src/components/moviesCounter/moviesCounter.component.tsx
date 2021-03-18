@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 
 interface CountProps {
     moviesCount: number;
 }
-export const MoviesCounterComponent: React.FC <CountProps> = ({moviesCount}: CountProps): JSX.Element => {
-    const classes = stylesList();
+export const MoviesCounterComponent: React.FC<CountProps> = ({moviesCount}): JSX.Element => {
+    const classes = useStyles();
 
     const [count] = useState(moviesCount);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {MoviesCounterComponent} from '../moviesCounter/moviesCounter.component';
 import {MovieItemComponent} from '../movieItem/movieItem.component';
@@ -10,9 +10,9 @@ interface MoviesProps {
     movies: MovieCard[];
 }
 
-export const MoviesComponent: React.FC <MoviesProps> = ({movies}: MoviesProps): JSX.Element => {
+export const MoviesComponent: React.FC<MoviesProps> = ({movies}): JSX.Element => {
 
-    const classes = stylesList();
+    const classes = useStyles();
 
     return (
         <div className={classes.movies}>

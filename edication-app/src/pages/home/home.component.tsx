@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 
 import {HeaderComponent} from '../../components/header/header.component';
 import {MoviesComponent} from '../../components/movies/movies.component';
@@ -8,7 +8,7 @@ import {DataContext} from '../../App/app';
 
 export const HomeComponent = (): JSX.Element => {
 
-    const classes = stylesList();
+    const classes = useStyles();
     const value = useContext(DataContext)
 
     return (

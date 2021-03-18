@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {stylesList} from '../styles';
-import {ConfirmProps} from '../../../common/interfaces/ApiDataInterface';
+import {useStyles} from '../styles';
+import {ConfirmProps, ModalProps} from '../../../common/interfaces/ApiDataInterface';
 
-interface ModalProps {
+interface ConfModalProps extends ModalProps {
     modalProps: ConfirmProps;
-    closeModal
 }
 
-export const ConfirmComponent: React.FC <ModalProps>= ({modalProps, closeModal}: ModalProps) => {
+export const ConfirmComponent: React.FC<ConfModalProps>= ({modalProps, closeModal}) => {
 
-    const classes = stylesList();
+    const classes = useStyles();
 
     return ReactDOM.createPortal(
         <aside className={classes.modalsOverlay}>

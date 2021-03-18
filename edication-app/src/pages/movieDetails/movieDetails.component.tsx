@@ -1,5 +1,5 @@
 import React, {useState, useContext, useCallback} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 
 import {HeaderComponent} from '../../components/header/header.component';
 import {MoviesComponent} from '../../components/movies/movies.component';
@@ -18,7 +18,7 @@ const IdCounter = ({initialCount, setCount, minSize, maxSize}) => {
 }
 
 export const MovieDetailsComponent = (): JSX.Element => {
-    const classes = stylesList();
+    const classes = useStyles();
 
     const value = useContext(DataContext)
 

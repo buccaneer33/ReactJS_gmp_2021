@@ -1,13 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 import {DataContext} from '../../App/app';
 
 interface DetailsProps {
     id: number
 }
 
-export const DetailsMovieComponent: React.FC <DetailsProps> = ({id}: DetailsProps): JSX.Element => {
-    const classes = stylesList();
+export const DetailsMovieComponent: React.FC<DetailsProps> = ({id}): JSX.Element => {
+    const classes = useStyles();
 
     const value = useContext(DataContext)
 

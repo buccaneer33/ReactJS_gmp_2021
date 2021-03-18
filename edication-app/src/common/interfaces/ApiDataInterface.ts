@@ -18,3 +18,7 @@ export interface ConfirmProps {
         ok?: boolean,
     }
 }
+
+export interface ModalProps {
+    closeModal: () => void;
+}

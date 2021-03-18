@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {stylesList} from '../styles';
+import {useStyles} from '../styles';
+import {ModalProps} from '../../../common/interfaces/ApiDataInterface';
 
-interface ModalProps {
-    closeModal
-}
+export const EditMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
 
-export const EditMovieComponent: React.FC <ModalProps> = ({closeModal}: ModalProps) => {
-
-    const classes = stylesList();
+    const classes = useStyles();
 
     return ReactDOM.createPortal(
         <aside className={classes.modalsOverlay}>

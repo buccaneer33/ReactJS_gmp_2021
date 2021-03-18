@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 
 import {LogoComponent} from '../logo/logo.component';
 import {MovieSearchComponent} from '../movieSearch/movieSearch.component';
@@ -7,7 +7,7 @@ import {AddMovieComponent} from '../modals/add-movie/add-movie.component';
 
 export const HeaderComponent: React.FC = (): JSX.Element => {
 
-    const classes = stylesList();
+    const classes = useStyles();
 
     const [modalState, setState] = useState(false);
 

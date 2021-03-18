@@ -1,6 +1,6 @@
 import {createUseStyles} from 'react-jss'
 
-export const stylesList = createUseStyles({
+export const useStyles = createUseStyles({
     block: {
         width: '100%',
         color: '#FFFFFF'

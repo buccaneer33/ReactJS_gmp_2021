@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 import {MovieCard} from '../../common/interfaces/ApiDataInterface';
 import {EditMovieComponent} from '../modals/edit-movie/edit-movie.component';
 import {ConfirmComponent} from '../modals/confirm/confirm.component';
@@ -17,9 +17,9 @@ interface MovieProps {
     movieCard: MovieCard;
 }
 
-export const MovieItemComponent: React.FC <MovieProps> = ({movieCard}: MovieProps): JSX.Element => {
+export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Element => {
 
-    const classes = stylesList();
+    const classes = useStyles();
 
     const [showEdit, setEditState] = useState(false);
     const [showDel, setDelState] = useState(false);

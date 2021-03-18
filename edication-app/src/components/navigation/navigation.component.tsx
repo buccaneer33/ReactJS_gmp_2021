@@ -1,12 +1,12 @@
 import React from 'react';
-import {stylesList} from './styles';
+import {useStyles} from './styles';
 import {SortByComponent} from '../sortBy/sortBy.component';
 
 const movies = ['all', 'documentary', 'comedy', 'horror', 'crime']
 
 export const NavigationComponent: React.FC = () => {
 
-    const classes = stylesList();
+    const classes = useStyles();
 
     return (
         <div className={classes.nav}>

@@ -1,6 +1,6 @@
 import {createUseStyles} from 'react-jss'
 
-export const stylesList = createUseStyles({
+export const useStyles = createUseStyles({
     modalsOverlay: {
         display: 'flex',
         position: 'fixed',
