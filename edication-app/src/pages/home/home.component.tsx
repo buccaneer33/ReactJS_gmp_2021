@@ -1,20 +1,21 @@
-import React from 'react';
-import {stylesList} from './styles';
+import React, {useContext} from 'react';
+import {useStyles} from './styles';
 
 import {HeaderComponent} from '../../components/header/header.component';
 import {MoviesComponent} from '../../components/movies/movies.component';
 import {FooterComponent} from '../../components/footer/footer.component';
+import {DataContext} from '../../App/app';
 
-const {classes} = stylesList.attach();
+export const HomeComponent = (): JSX.Element => {
 
-export class HomeComponent extends React.Component {
-    render (): JSX.Element {
-        return (
-            <div className={classes.homePage}>
-                <HeaderComponent />
-                <MoviesComponent />
-                <FooterComponent />
-            </div>
-        );
-    }
+    const classes = useStyles();
+    const value = useContext(DataContext)
+
+    return (
+        <div className={classes.homePage}>
+            <HeaderComponent />
+            <MoviesComponent movies={value}/>
+            <FooterComponent />
+        </div>
+    );
 }

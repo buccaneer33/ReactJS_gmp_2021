@@ -1,6 +1,6 @@
-import {jss} from 'react-jss'
+import {createUseStyles} from 'react-jss'
 
-export const stylesList = jss.createStyleSheet({
+export const useStyles = createUseStyles({
     nav: {
         display: 'flex',
         flexDirection: 'row',
