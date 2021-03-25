@@ -2,10 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {useStyles} from '../styles';
 import {ModalProps} from '../../../common/interfaces/ApiDataInterface';
+import {useDispatch} from 'react-redux';
+import {addMovies} from '../../../store/actions/addMovie';
+import {uploadCard} from '../../../common/interfaces/ApiDataInterface';
 
 export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
 
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+
+    const fakeData: uploadCard = {
+        title: 'Kin Dza Dza',
+        tagline: 'Cooooo',
+        vote_average: 6,
+        vote_count: 7,
+        release_date: '1985-02-07',
+        poster_path: 'https://www.themoviedb.org/t/p/w220_and_h330_face/aKPifwW46ZDgs58byHCCJGb1bbx.jpg',
+        overview: 'Two Soviet humans previously unknown to each other are transported to the planet Pluke in the Kin-dza-da galaxy due to a chance encounter with an alien teleportation device. They must come to grips with a language barrier and Plukian social norms (not to mention the laws of space and time) if they ever hope to return to Earth.',
+        budget: 100500,
+        revenue: 9,
+        runtime: 100,
+        genres: ['new'],
+    }
+    const submitClick = () => {
+        dispatch(addMovies(fakeData));
+        closeModal();
+    }
 
     return ReactDOM.createPortal(
         <aside className={classes.modalsOverlay}>
@@ -50,8 +73,8 @@ export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
                     </div>
                 </div>
                 <div className={classes.modalFooter}>
-                    <button className={classes.resetButton}>reset</button>
-                    <button className={classes.submitButton}>submit</button>
+                    <button  className={classes.resetButton}>reset</button>
+                    <button onClick={() => submitClick()} className={classes.submitButton}>submit</button>
                 </div>
             </div>
         </aside>,

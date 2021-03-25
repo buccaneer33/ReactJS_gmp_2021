@@ -32,6 +32,8 @@ export const useStyles = createUseStyles({
         color: '#FFFFFF',
         cursor: 'pointer',
         textTransform: 'uppercase',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        backgroundColor: 'transparent',
+        border: 'none'
     }
 });

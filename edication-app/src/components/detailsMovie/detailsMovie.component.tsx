@@ -1,6 +1,8 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React from 'react';
 import {useStyles} from './styles';
-import {DataContext} from '../../App/app';
+import {useSelector} from 'react-redux';
+import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
+
 
 interface DetailsProps {
     id: number
@@ -9,38 +11,37 @@ interface DetailsProps {
 export const DetailsMovieComponent: React.FC<DetailsProps> = ({id}): JSX.Element => {
     const classes = useStyles();
 
-    const value = useContext(DataContext)
+    const currentFilm: newMovieCard = useSelector((state) => {
+        return (state.movieReducer).find(movie => movie.id === id )
+    })
 
-    const [currentMovie, setMovie] = useState(value[id]);
-
-    useEffect(() => {
-        setMovie(value[id]);
-    }, [id, value])
 
     return (<>
-        {currentMovie && 
+        {currentFilm && 
             (<div className={classes.content}>
                 <div className={classes.logo}>
                     <strong>netflix</strong>roulette
                 </div>
                 <div className={classes.imgBlock}>
-                    <img src={currentMovie.movieUrl} alt={currentMovie.title} className={classes.img} />
+                    <img src={currentFilm.poster_path} alt={currentFilm.title} className={classes.img} />
                 </div>
                 <div className={classes.contentBlock}>
                     <div className={classes.contentHeaderBlock}>
-                        <h2 className={classes.contentHeader}>{currentMovie.title}</h2>
-                        <span className={classes.rating}>{currentMovie.movieRating}</span>
+                        <h2 className={classes.contentHeader}>{currentFilm.title}</h2>
+                        <span className={classes.rating}>{currentFilm.vote_average}</span>
                     </div>
-                    <div className={classes.ganreBlock}>{currentMovie.ganre}</div>
+                    <div className={classes.ganreBlock}>
+                        {currentFilm.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
+                    </div>
                     <div className={classes.infoBlock}>
-                        <span className={classes.info}>{currentMovie.releaseDate}</span>
-                        <span className={classes.info}>{currentMovie.movieDuration} min</span>
+                        <span className={classes.info}>{currentFilm.release_date}</span>
+                        <span className={classes.info}>{currentFilm.runtime} min</span>
                     </div>
                     <div className={classes.overviewBlock}>
-                        {currentMovie.overview}
+                        {currentFilm.overview}
                     </div>
                 </div>
-                <strong>{currentMovie.id}</strong>
+                <strong>{currentFilm.id}</strong>
             </div>)}
     </>);
 }

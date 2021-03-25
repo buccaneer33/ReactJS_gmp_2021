@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {useStyles} from './styles';
-import {MovieCard} from '../../common/interfaces/ApiDataInterface';
+import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
 import {EditMovieComponent} from '../modals/edit-movie/edit-movie.component';
 import {ConfirmComponent} from '../modals/confirm/confirm.component';
 import {ConfirmProps} from '../../common/interfaces/ApiDataInterface';
+import {useDispatch} from "react-redux";
+import {removeMovies} from '../../store/actions/removeMovie';
 
 const confirmProps: ConfirmProps = {
     content: 'Are you sure you want to delete this movie',
@@ -14,12 +16,13 @@ const confirmProps: ConfirmProps = {
 }
 
 interface MovieProps {
-    movieCard: MovieCard;
+    movieCard: newMovieCard;
 }
 
 export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Element => {
 
     const classes = useStyles();
+    const id = movieCard.id
 
     const [showEdit, setEditState] = useState(false);
     const [showDel, setDelState] = useState(false);
@@ -28,6 +31,7 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
     const toggleTolltip = (): void => {
         setTolltip(!showTolltip)
     }
+    const dispatch = useDispatch();
 
     return (<>
         <div className={classes.movieItem}>
@@ -38,16 +42,16 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
                     <button onClick={() => setDelState(true)} className={classes.menuButton}>delete movie</button>
                 </div>
             }
-            <img className={classes.movieImg} alt={movieCard.title} src={movieCard.movieCardUrl} />
+            <img className={classes.movieImg} alt={movieCard.title} src={movieCard.poster_path} />
             <div className={classes.titleBlock}>
                 <span className={classes.title}>{movieCard.title}</span>
-                <span className={classes.date}>{movieCard.releaseDate}</span>
+                <span className={classes.date}>{movieCard.release_date}</span>
             </div>
             <div className={classes.ganre}>
-                {movieCard.ganre}
+                {movieCard.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
             </div>
         </div>
         { showEdit && <EditMovieComponent closeModal={() => setEditState(false)}/> }
-        { showDel && <ConfirmComponent closeModal={() => setDelState(false)} modalProps={confirmProps}/> }
+        { showDel && <ConfirmComponent closeModal={() => setDelState(false)} confirm={() => dispatch(removeMovies(id))} modalProps={confirmProps}/> }
     </>);
 }
