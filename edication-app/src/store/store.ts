@@ -13,7 +13,7 @@ export const store = createStore(
     composeEnhancers(applyMiddleware(thunk))
 );
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>;
 
 store.subscribe(() => {
     localStorage.setItem('reduxState', JSON.stringify(store.getState()));

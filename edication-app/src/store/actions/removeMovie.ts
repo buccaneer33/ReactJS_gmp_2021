@@ -1,5 +1,6 @@
 import {ACTIONS} from './actionsTypes';
 import {AppThunk} from '../../common/interfaces/ApiDataInterface';
+import {getMovies} from './getMovies';
 
 export const URL = 'http://localhost:4000/movies';
 
@@ -15,12 +16,11 @@ export const removeMovies = (id: number): AppThunk => {
                     method: 'DELETE',
                     headers: new Headers({ 'content-type': 'application/json' })
                 })
-                // .then(response => response.json())
                 .then(response => {
-                    // console.log("filmList: ", response);
+                    dispatch(getMovies([]));
                     dispatch({
-                        type: ACTIONS.REMOVE_MOVIE,
-                        payload: response.ok
+                        type: ACTIONS.GET_MOVIES,
+                        payload: response
                     })
                 })
         )

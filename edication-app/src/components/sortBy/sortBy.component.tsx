@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useStyles} from './styles';
 import {useDispatch} from 'react-redux';
-import { sortMovies } from '../../store/actions/sortMovies';
+import { getMovies } from '../../store/actions/getMovies';
 
 const selectList = [{id: 1, title: 'release_date'}, {id: 2, title: 'genres'}, {id: 3, title: 'title'}];
 
@@ -10,12 +10,12 @@ export const SortByComponent: React.FC = () => {
 
     const [filterState, setFilter] = useState();
 
-    const change = (event) => {setFilter(event.target.value)}
+    const change = (event) => event.target.value && setFilter(event.target.value)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(sortMovies(filterState));
+        filterState && dispatch(getMovies([{param: 'sortBy', value: filterState}]));
     }, [filterState, dispatch])
 
     return (

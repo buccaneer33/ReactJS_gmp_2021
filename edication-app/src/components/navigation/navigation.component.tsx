@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useStyles} from './styles';
 import {SortByComponent} from '../sortBy/sortBy.component';
 import {useDispatch} from "react-redux";
-import {fetchMovies} from '../../store/actions/fetchMovies';
-import {filterMovies} from '../../store/actions/filterMovies';
+import {getMovies} from '../../store/actions/getMovies';
 
 const ganres = ['all', 'Comedy', 'Drama', 'Romance', 'Action', 'Adventure', 'Fantasy']
 
@@ -17,9 +16,9 @@ export const NavigationComponent: React.FC = () => {
 
     useEffect(() => {
         if (currentGanre === 'all') {
-            dispatch(fetchMovies());
+            dispatch(getMovies([]));
         } else if (currentGanre !== 'all' && ganres.includes(currentGanre)) {
-            dispatch(filterMovies('genres', currentGanre));
+            dispatch(getMovies([{param: 'filter', value: currentGanre}]));
         }
     }, [currentGanre, dispatch])
 

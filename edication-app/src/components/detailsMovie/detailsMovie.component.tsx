@@ -3,7 +3,6 @@ import {useStyles} from './styles';
 import {useSelector} from 'react-redux';
 import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
 
-
 interface DetailsProps {
     id: number
 }
@@ -12,9 +11,8 @@ export const DetailsMovieComponent: React.FC<DetailsProps> = ({id}): JSX.Element
     const classes = useStyles();
 
     const currentFilm: newMovieCard = useSelector((state) => {
-        return (state.movieReducer).find(movie => movie.id === id )
+        return (state.films).find(movie => movie.id === id )
     })
-
 
     return (<>
         {currentFilm && 

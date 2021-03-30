@@ -1,29 +1,19 @@
 import {ACTIONS} from '../actions/actionsTypes';
-import orderBy from 'lodash/orderBy';
+import {AnyAction, Reducer} from 'redux';
+import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
 
-export const initialState = [];
+export const initialState: any[] = [];
 
-type ActionProps = {
-    type: string,
-    payload: any
-}
-
-export const movieReducer = (state = initialState, action: ActionProps): ActionProps["payload"] => {
+export const movieReducer: Reducer = (state = initialState, action: AnyAction): newMovieCard[] => {
     switch(action.type) {
-        case ACTIONS.FETCH_MOVIES:
-           return action.payload;
-        case ACTIONS.SEARCH_MOVIES:
-            return action.payload;
         case ACTIONS.ADD_MOVIE:
             return action.payload;
-        case ACTIONS.SORT_MOVIES:
-            return orderBy(state, action.payload, 'asc');
         case ACTIONS.REMOVE_MOVIE:
             return action.payload;
         case ACTIONS.EDIT_MOVIE:
-                return action.payload;
-        case ACTIONS.FILTER_MOVIES:
-                return action.payload;
+            return action.payload;
+        case ACTIONS.GET_MOVIES: 
+            return action.payload;
         default: 
             return state;
     }

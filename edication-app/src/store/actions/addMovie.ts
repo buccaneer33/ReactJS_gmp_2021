@@ -1,12 +1,14 @@
 import {ACTIONS} from './actionsTypes';
 import {uploadCard} from '../../common/interfaces/ApiDataInterface';
 import {AppThunk} from '../../common/interfaces/ApiDataInterface';
+import {getMovies} from './getMovies';
 
 export const URL = 'http://localhost:4000/movies';
 
-export const addMovies = (movie: uploadCard): AppThunk => {
-    // console.log(movie);
-    if (!movie) return
+
+export const addMovies = (movie: uploadCard, fill: (result, response)=> void): AppThunk => {
+    if (!movie) return;
+    let clearResponse;
 
     return (
         (dispatch) => (
@@ -17,21 +19,27 @@ export const addMovies = (movie: uploadCard): AppThunk => {
                     headers: new Headers({ 'content-type': 'application/json' }),
                     body: JSON.stringify(movie)
                 })
-                .then(response => response.json())
                 .then(response => {
-                    // console.log("filmList: ", response);
-                    let serverResponse: boolean;
-                    if (response instanceof Object) {
-                        if (!response.hasOwnProperty('messages')) {
-                            serverResponse = true;
-                        } else {
-                            serverResponse = false;
-                        }
-                    } 
+                    clearResponse = response;
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.json().then(response => 
+                            Promise.reject(response)
+                        )
+                    }
+                    
+                })
+                .then(response => {
+                    fill?.(clearResponse, response);
+                    dispatch(getMovies([]));
                     dispatch({
                         type: ACTIONS.ADD_MOVIE,
-                        payload: serverResponse
+                        payload: response
                     })
+                })
+                .catch(error => {
+                    fill?.(clearResponse, error)
                 })
         )
     )
