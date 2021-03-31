@@ -1,52 +1,27 @@
-import React, {useState, useContext, useCallback} from 'react';
+import React from 'react';
 import {useStyles} from './styles';
 
 import {HeaderComponent} from '../../components/header/header.component';
 import {MoviesComponent} from '../../components/movies/movies.component';
 import {FooterComponent} from '../../components/footer/footer.component';
 import {DetailsMovieComponent} from '../../components/detailsMovie/detailsMovie.component';
-import {DataContext} from '../../App/app';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import type { RootState } from '../../store/store'
 
-const IdCounter = ({initialCount, setCount, minSize, maxSize}) => {
-    return (
-        <>
-            <span>{initialCount}</span>
-            <button onClick={() => setCount(minSize, maxSize, initialCount + 1)}>+</button>
-            <button onClick={() => setCount(minSize, maxSize, initialCount - 1)}>-</button>
-        </>
-    );
-}
+
 
 export const MovieDetailsComponent = (): JSX.Element => {
+
     const classes = useStyles();
+    const id = 337167;
 
-    const value = useContext(DataContext)
+    const films: TypedUseSelectorHook<RootState> = useSelector(state => state.films)
 
-    const [movieState, setId] = useState(0);
-
-    const setCount = (maxSize, minSize, number): void => {
-        let  currentCounter;
-        if (number < minSize) {
-            currentCounter = minSize;
-        } else if (number > maxSize) {
-            currentCounter = maxSize;
-        } else if (number > minSize && number < maxSize ) {
-            currentCounter = number;
-        }
-        setId(currentCounter);
-    }
-
-    const callback = useCallback((minSize, maxSize, number) => {
-        console.log('maxSize' + maxSize, 'minSize' +  minSize, 'number' + number);
-        setCount(maxSize, minSize, number)
-    }, []);
-
-    return (
+    return (<>{
         <div className={classes.detailsPage}>
-            {(movieState && movieState > 0 ) ? <DetailsMovieComponent id={movieState} /> : <HeaderComponent />}
-            <IdCounter initialCount={movieState} setCount={callback} minSize={0} maxSize={value.length} />
-            <MoviesComponent movies={value} />
+        {(id && films?.length ) ? <DetailsMovieComponent id={id} /> : <HeaderComponent />}
+            <MoviesComponent movies={films} />
             <FooterComponent />
-        </div>
-    );
+    </div>
+    }</>);
 }

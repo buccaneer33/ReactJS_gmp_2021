@@ -5,9 +5,10 @@ import {ConfirmProps, ModalProps} from '../../../common/interfaces/ApiDataInterf
 
 interface ConfModalProps extends ModalProps {
     modalProps: ConfirmProps;
+    confirm?: () => void;
 }
 
-export const ConfirmComponent: React.FC<ConfModalProps>= ({modalProps, closeModal}) => {
+export const ConfirmComponent: React.FC<ConfModalProps>= ({modalProps, closeModal, confirm}) => {
 
     const classes = useStyles();
 
@@ -29,7 +30,7 @@ export const ConfirmComponent: React.FC<ConfModalProps>= ({modalProps, closeModa
                 </div>
                 <div className={classes.modalFooter}>
                     {modalProps.buttons.yes &&
-                        <><button className={classes.submitButton}>confirm</button></>}
+                        <><button onClick={confirm} className={classes.submitButton}>confirm</button></>}
                     {modalProps.buttons.no &&
                         <><button onClick={closeModal} className={classes.submitButton}>close</button></>}
                 </div>

@@ -1,18 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {stylesList} from './styles';
-import {HomeComponent} from '../pages/home/home.component';
 import {MovieDetailsComponent} from '../pages/movieDetails/movieDetails.component';
-import {moviePreviewStub} from '../appStubs/moviePreviewStub';
+import {store} from '../store/store';
+import { Provider, useDispatch} from "react-redux";
+import { getMovies } from '../store/actions/getMovies';
+import {HomeComponent} from '../pages/home/home.component';
 
 const {classes} = stylesList.attach();
-export const DataContext = React.createContext(null);
 
 export const App: React.FC = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMovies([]));
+    }, [dispatch])
+
     return (
         <div className={classes.AppComponent}>
-            <DataContext.Provider value={moviePreviewStub}>
-                <MovieDetailsComponent />
-            </DataContext.Provider>
+            <Provider store={store}>
+                <HomeComponent />
+            </Provider>
         </div>
     );
 }
