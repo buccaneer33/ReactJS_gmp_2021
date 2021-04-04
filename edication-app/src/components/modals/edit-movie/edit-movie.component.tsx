@@ -1,34 +1,49 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {useStyles} from '../styles';
 import {ModalProps, newMovieCard} from '../../../common/interfaces/ApiDataInterface';
 import {useDispatch} from 'react-redux';
 import {editMovie} from '../../../store/actions/editMovie';
+import {Form, FormikProps, Formik, Field, useFormikContext} from 'formik';
+import * as Yup from "yup";
+import {InputField} from '../../fields/inputField/InputField';
+import {SelectField} from '../../fields/selectField/SelectField';
+import {DateField} from '../../fields/dateField/DateField';
+import {genresStub} from '../../../common/static/genresStub';
 
 interface errorsProps {
     id: number;
     message: string;
 }
-const fakeData: newMovieCard = {
-    title: 'La La Land',
-    tagline: 'Here is to the fools who dream.',
-    vote_average: 7.9,
-    vote_count: 6782,
-    release_date: '2016-12-29',
-    poster_path: 'https://image.tmdb.org/t/p/w500/ylXCdC106IKiarftHkcacasaAcb.jpg',
-    overview: 'Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.',
-    budget: 30000000,
-    revenue: 445435700,
-    runtime: 128,
-    genres: [
-      'Comedy',
-      'Drama',
-      'Romance'
-    ],
-    id: 337167
+interface EditProps extends ModalProps {
+    filmData: newMovieCard
 }
+const ValidationSchema = Yup.object().shape({
+    title: Yup.string()
+        .min(2, 'Too Short!')
+        .max(70, 'Too Long!')
+        .required('Required'),
+    tagline: Yup.string()
+        .min(2, 'Too Short!')
+        .max(70, 'Too Long!')
+        .required('Required'),
+    poster_path: Yup.string().url()
+        .required('Required'),
+    release_date: Yup.date()
+        .required('Required'),
+    overview: Yup.string()
+        .min(2, 'Too Short!')
+        .max(500, 'Too Long!')
+        .required('Required'),
+    runtime: Yup.number()
+        .min(5, 'Too Small!')
+        .max(300, 'Too Big!')
+        .required('Required'),
+    genres: Yup.array()
+        .required('Required')
+});
 
-export const EditMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
+export const EditMovieComponent: React.FC<EditProps> = ({closeModal, filmData}) => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -46,62 +61,73 @@ export const EditMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
         }
     }
 
-    const submitClick = () => {
-        dispatch(editMovie(fakeData, callBack));
-    }
+    /* только для хука */
+    const AutoSubmitToken = () => {
+        const { values, submitForm } = useFormikContext();
+        useEffect(() => {
+            if ((values as newMovieCard).token.length >= 6  ) {
+                const {token, ...newObj} = values as newMovieCard;
+                dispatch(editMovie(newObj as newMovieCard, callBack))
+            }
+        }, [values, submitForm]);
+        return null;
+    };
 
     return ReactDOM.createPortal(
         <aside className={classes.modalsOverlay}>
-            <div className={classes.modalContent}>
-                <div className={classes.modalHeader}>
-                    <h2 className={classes.title}>Edit movie</h2>
-                    <button className={classes.closeButton} onClick={closeModal}>
-                        <svg viewBox="0 0 40 40">
-                            <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
-                        </svg>
-                    </button>
-                </div>
-                <div className={classes.modalBody}>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>title</label>
-                        <input className={classes.input} type="text" placeholder="title here" />
-                    </div>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>release date</label>
-                        <input className={classes.input} type="date" placeholder="date here" />
-                    </div>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>movie url</label>
-                        <input className={classes.input} type="text" placeholder="movie url here" />
-                    </div>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>genre</label>
-                        <select className={classes.input}>
-                            <option>Crime</option>
-                            <option>Documentary</option>
-                            <option>Horror</option>
-                            <option>Comedy</option>
-                        </select>
-                    </div>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>overview</label>
-                        <input className={classes.input} type="text" placeholder="overview here" />
-                    </div>
-                    <div className={classes.inputItem}>
-                        <label className={classes.inputLabel}>runtime</label>
-                        <input className={classes.input} type="text" placeholder="runtime here" />
-                    </div>
-                </div>
-                {errors?.length && <div className={classes.modalFooter}>
-                   <ul>
-                        {errors.map(value => <li key={value.id}>{value.message}</li>)}
-                   </ul>
-                </div>}
-                <div className={classes.modalFooter}>
-                    <button className={classes.resetButton}>reset</button>
-                    <button onClick={submitClick} className={classes.submitButton}>submit</button>
-                </div>
-            </div>
+            <Formik
+                initialValues={Object.assign(filmData, {token: ''})}
+                validationSchema={ValidationSchema}
+                onSubmit={(values, actions) => {
+                    // alert(JSON.stringify(values, null, 2));
+                    actions.setSubmitting(false);
+                }}>
+                {(props: FormikProps<newMovieCard>) => (
+                    <Form className={classes.modalForm}>
+                        <div className={classes.modalContent}>
+                            <div className={classes.modalHeader}>
+                                <h2 className={classes.title}>add movie</h2>
+                                <button className={classes.closeButton} onClick={closeModal}>
+                                    <svg viewBox="0 0 40 40">
+                                        <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className={classes.modalBody}>
+                                <div className={classes.inputItem}>
+                                    <InputField name="title" placeholder="title here" type="text" label="Title" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <InputField name="tagline" placeholder="Tagline" type="text" label="Tagline" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <DateField name="release_date" placeholder="Release date" type="date" label="Release date" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <InputField name="poster_path" type="text" placeholder="Poster path" label="Poster path" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <Field name= {'genres'} component={SelectField} options={genresStub} />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <InputField name="overview" type="text" placeholder="Owerview here" label="Owerview" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <InputField name="runtime" type="number" placeholder="Runtime here" label="Runtime" />
+                                </div>
+                                <div className={classes.inputItem}>
+                                    <Field name="token" type="text" />
+                                </div>
+                                <AutoSubmitToken />
+                            </div>
+                            <div className={classes.modalFooter}>
+                                <button type="reset" className={classes.resetButton}>reset</button>
+                                <button type="submit" className={classes.submitButton}>submit</button>
+                            </div>
+                        </div>
+                    </Form>
+                )}
+            </Formik>
         </aside>,
         document.body
     );
