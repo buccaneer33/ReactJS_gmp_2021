@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useStyles} from './styles';
+import {NavLink} from "react-router-dom";
+
 import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
 import {EditMovieComponent} from '../modals/edit-movie/edit-movie.component';
 import {ConfirmComponent} from '../modals/confirm/confirm.component';
@@ -35,24 +37,27 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
     const dispatch = useDispatch();
 
     return (<>
-        <div className={classes.movieItem}>
-            <div onClick={toggleTolltip} className={classes.control}></div>
-            { showTolltip &&
-                <div className={classes.menu}>
-                    <button onClick={() => setEditState(true)} className={classes.menuButton}>Edit movie</button>
-                    <button onClick={() => setDelState(true)} className={classes.menuButton}>delete movie</button>
+        
+            <div className={classes.movieItem}>
+                <div onClick={toggleTolltip} className={classes.control}></div>
+                { showTolltip &&
+                    <div className={classes.menu}>
+                        <button onClick={() => setEditState(true)} className={classes.menuButton}>Edit movie</button>
+                        <button onClick={() => setDelState(true)} className={classes.menuButton}>delete movie</button>
+                    </div>
+                }
+                <NavLink className={classes.movieLink} to={location => ({ ...location, pathname: `/film/${id}` })}>
+                    <img className={classes.movieImg} alt={movieCard.title} src={movieCard.poster_path} />
+                </NavLink>
+                <div className={classes.titleBlock}>
+                    <span className={classes.title}>{movieCard.title}</span>
+                    <span className={classes.date}>{movieCard.release_date}</span>
                 </div>
-            }
-            <img className={classes.movieImg} alt={movieCard.title} src={movieCard.poster_path} />
-            <div className={classes.titleBlock}>
-                <span className={classes.title}>{movieCard.title}</span>
-                <span className={classes.date}>{movieCard.release_date}</span>
+                <div className={classes.ganre}>
+                    {movieCard.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
+                </div>
             </div>
-            <div className={classes.ganre}>
-                {movieCard.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
-            </div>
-        </div>
-        { showEdit && <EditMovieComponent filmData={movieCard} closeModal={() => setEditState(false)}/> }
-        { showDel && <ConfirmComponent closeModal={() => setDelState(false)} confirm={() => dispatch(removeMovies(id))} modalProps={confirmProps}/> }
+            { showEdit && <EditMovieComponent filmData={movieCard} closeModal={() => setEditState(false)}/> }
+            { showDel && <ConfirmComponent closeModal={() => setDelState(false)} confirm={() => dispatch(removeMovies(id))} modalProps={confirmProps}/> }
     </>);
 }

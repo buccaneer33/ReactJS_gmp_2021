@@ -1,8 +1,8 @@
 import React, {StrictMode} from 'react';
 import ReactDOM from 'react-dom';
 import {App} from './App/app';
-import { store } from './store/store';
-import { Provider } from 'react-redux';
+import {store} from './store/store';
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
     <StrictMode>
@@ -12,5 +12,3 @@ ReactDOM.render(
     </StrictMode>,
     document.getElementById('root')
 );
-
-

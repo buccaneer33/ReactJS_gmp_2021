@@ -27,7 +27,9 @@ export const useStyles = createUseStyles({
         backgroundColor: '#F65261',
         textTransform: 'uppercase',
         border: '1px solid #F65261',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        textDecoration: 'none',
+        marginLeft: '5px'
     }
 });
 

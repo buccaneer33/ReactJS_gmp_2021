@@ -22,6 +22,10 @@ export const MoviesComponent: React.FC<MoviesProps> = ({movies}): JSX.Element =>
                 {(movies instanceof Array && movies.length) && <div className={classes.moviesBlock}>
                     {movies.map((item) => <MovieItemComponent key={item.id} movieCard={item}/>)}
                 </div>}
+                {(movies instanceof Array && !movies.length) &&
+                <div className={classes.noFoundBlock}>
+                    <h2 className={classes.noFoundHeader}>No movies found</h2>
+                </div>}
             </ErrorBoundary>
         </div>
     );

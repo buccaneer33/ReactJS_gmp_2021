@@ -11,7 +11,7 @@ export const DetailsMovieComponent: React.FC<DetailsProps> = ({id}): JSX.Element
     const classes = useStyles();
 
     const currentFilm: newMovieCard = useSelector((state) => {
-        return (state.films).find(movie => movie.id === id )
+        return (state.films as Array<newMovieCard>).find(movie => movie.id === +id);
     })
 
     return (<>

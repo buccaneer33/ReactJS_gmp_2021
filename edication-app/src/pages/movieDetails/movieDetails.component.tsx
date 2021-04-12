@@ -8,18 +8,28 @@ import {DetailsMovieComponent} from '../../components/detailsMovie/detailsMovie.
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import type { RootState } from '../../store/store'
 
+interface PageProps {
+    id: number;
+}
 
-
-export const MovieDetailsComponent = (): JSX.Element => {
+export const MovieDetailsComponent: React.FC<PageProps> = ({id}): JSX.Element => {
 
     const classes = useStyles();
-    const id = 337167;
 
     const films: TypedUseSelectorHook<RootState> = useSelector(state => state.films)
 
+    const isIdValid = () => {
+        if (!id) {
+            return false;
+        }
+        if (films.find(film => film.id === +id)) {
+            return true;
+        }
+    }
+
     return (<>{
         <div className={classes.detailsPage}>
-        {(id && films?.length ) ? <DetailsMovieComponent id={id} /> : <HeaderComponent />}
+        {(isIdValid() && films?.length ) ? <DetailsMovieComponent id={id} /> : <HeaderComponent />}
             <MoviesComponent movies={films} />
             <FooterComponent />
     </div>

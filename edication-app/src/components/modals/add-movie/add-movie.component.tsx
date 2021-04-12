@@ -5,7 +5,7 @@ import {ModalProps} from '../../../common/interfaces/ApiDataInterface';
 import {useDispatch} from 'react-redux';
 import {addMovies} from '../../../store/actions/addMovie';
 import {uploadCard} from '../../../common/interfaces/ApiDataInterface';
-import {Form, FormikProps, Formik, Field, withFormik} from 'formik';
+import {Form, FormikProps, Formik, Field} from 'formik';
 import * as Yup from "yup";
 import {InputField} from '../../fields/inputField/InputField';
 import {SelectField} from '../../fields/selectField/SelectField';

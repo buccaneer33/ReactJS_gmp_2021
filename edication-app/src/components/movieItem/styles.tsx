@@ -47,9 +47,14 @@ export const useStyles = createUseStyles({
             backgroundColor: '#F65261',
         }
     },
+    movieLink: {
+        width: '100%',
+        height: '75%',
+        backgroundColor: '#000055'
+    },
     movieImg: {
         width: '100%',
-        height: '85%',
+        height: '100%',
         backgroundColor: '#000055'
     },
     titleBlock: {
