@@ -5,12 +5,11 @@ import {ModalProps} from '../../../common/interfaces/ApiDataInterface';
 import {useDispatch} from 'react-redux';
 import {addMovies} from '../../../store/actions/addMovie';
 import {uploadCard} from '../../../common/interfaces/ApiDataInterface';
-import {Form, FormikProps, Formik, Field, withFormik} from 'formik';
-import * as Yup from "yup";
+import {Form, FormikProps, Formik, Field} from 'formik';
 import {InputField} from '../../fields/inputField/InputField';
 import {SelectField} from '../../fields/selectField/SelectField';
-import {DateField} from '../../fields/dateField/DateField';
 import {genresStub} from '../../../common/static/genresStub';
+import {ValidationSchema} from '../../../common/static/validationSchema';
 
 interface errorsProps {
     id: number;
@@ -31,31 +30,6 @@ const uploadData: uploadCard = {
     genres: [],
 }
 
-const ValidationSchema = Yup.object().shape({
-    title: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required'),
-    tagline: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required'),
-    poster_path: Yup.string().url()
-        .required('Required'),
-    release_date: Yup.date()
-        .required('Required'),
-    overview: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required'),
-    runtime: Yup.number()
-        .min(5, 'Too Small!')
-        .max(300, 'Too Big!')
-        .required('Required'),
-    genres: Yup.array()
-        .required('Required')
-});
-
 export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
 
     const classes = useStyles();
@@ -75,18 +49,19 @@ export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
             }
         }
     }
+    const submit = (values) => {
+        // alert(JSON.stringify(values, null, 2));
+        dispatch(addMovies(values, callBack))
+    }
 
     return ReactDOM.createPortal(
         <aside className={classes.modalsOverlay}>
             <Formik
                 initialValues={uploadData}
                 validationSchema={ValidationSchema}
-                onSubmit={(values) => {
-                    // alert(JSON.stringify(values, null, 2));
-                    dispatch(addMovies(values, callBack))
-                }}>
+                onSubmit={(values) => submit(values)}>
                 {(props: FormikProps<uploadCard>) => (
-                    <Form className={classes.modalForm}>
+                    <Form onSubmit={props.handleSubmit} className={classes.modalForm}>
                         <div className={classes.modalContent}>
                             <div className={classes.modalHeader}>
                                 <h2 className={classes.title}>add movie</h2>
@@ -104,7 +79,7 @@ export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
                                     <InputField name="tagline" placeholder="Tagline" type="text" label="Tagline" />
                                 </div>
                                 <div className={classes.inputItem}>
-                                    <DateField name="release_date" placeholder="Release date" type="date" label="Release date" />
+                                    <InputField name="release_date" placeholder="Release date" type="date" label="Release date" />
                                 </div>
                                 <div className={classes.inputItem}>
                                     <InputField name="poster_path" type="text" placeholder="Poster path" label="Poster path" />

@@ -1,16 +1,18 @@
 import React from 'react';
-import {PropsType} from '../../../common/interfaces/ApiDataInterface';
+import {InputProps} from '../../../common/interfaces/ApiDataInterface';
 import {useStyles} from '../styles';
 import {FieldProps} from 'formik';
 import Select, { Option, ReactSelectProps, ValueType } from 'react-select'
+import {ErrorField} from '../fieldError/FieldError';
 
 export const SelectField: React.JSXElementConstructor<ReactSelectProps & FieldProps> = ({
     options,
     field,
     form,
+    meta,
     label,
     isMulti = true,
- }:PropsType) => {
+ }:InputProps) => {
 
     const classes = useStyles();
 
@@ -33,7 +35,7 @@ export const SelectField: React.JSXElementConstructor<ReactSelectProps & FieldPr
     };
     return (
       <>
-        <label className={classes.inputLabel}>{label}</label>
+        <label className={classes.inputLabel} {...field}>{label}</label>
         <Select
             name={field.name}
             value={getValue()}
@@ -42,6 +44,7 @@ export const SelectField: React.JSXElementConstructor<ReactSelectProps & FieldPr
             onChange={onChange}
             onBlur={field.onBlur}
         />
+        <ErrorField meta={meta}/>
       </>
     );
 };
