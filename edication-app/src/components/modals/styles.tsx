@@ -13,11 +13,15 @@ export const useStyles = createUseStyles({
         justifyContent: 'space-around',
         alignItems: 'center',
     },
+    modalForm: {
+        width: '40%'
+    },
     modalContent:{
         background: '#232323',
         padding: '20px',
         borderRadius: '3px',
-        width: '40%',
+        width: '100%',
+        maxWidth: '400px',
         minHeight: '20%'
     },
     modalHeader:{
@@ -48,7 +52,7 @@ export const useStyles = createUseStyles({
         height: '75px',
         display: 'flex',
         flexDirection: 'column',
-        padding: '20px'
+        padding: '10px'
     },
     inputLabel: {
         color: '#F65261',
@@ -87,4 +91,7 @@ export const useStyles = createUseStyles({
         fontSize: '19px',
         margin: '0 5px'
     },
+    fieldError: {
+        color: '#F65261'
+    }
 })

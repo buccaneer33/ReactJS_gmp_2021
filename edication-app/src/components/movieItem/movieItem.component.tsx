@@ -31,6 +31,7 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
     const toggleTolltip = (): void => {
         setTolltip(!showTolltip)
     }
+
     const dispatch = useDispatch();
 
     return (<>
@@ -51,7 +52,7 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
                 {movieCard.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
             </div>
         </div>
-        { showEdit && <EditMovieComponent closeModal={() => setEditState(false)}/> }
+        { showEdit && <EditMovieComponent filmData={movieCard} closeModal={() => setEditState(false)}/> }
         { showDel && <ConfirmComponent closeModal={() => setDelState(false)} confirm={() => dispatch(removeMovies(id))} modalProps={confirmProps}/> }
     </>);
 }

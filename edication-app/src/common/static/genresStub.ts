@@ -1,0 +1,16 @@
+export const genresStub = [
+    {value: 'Crime', label: 'Crime'},
+    {value: 'Documentary', label: 'Documentary'},
+    {value: 'Horror', label: 'Horror'},
+    {value: 'Comedy', label: 'Comedy'},
+    {value: 'Animation', label: 'Animation'},
+    {value: 'Adventure', label: 'Adventure'},
+    {value: 'Comedy', label: 'Comedy'},
+    {value: 'Drama', label: 'Drama'},
+    {value: 'Romance', label: 'Romance'},
+    {value: 'Fantasy', label: 'Fantasy'},
+    {value: 'Science', label: 'Science'},
+    {value: 'Fiction', label: 'Fiction'},
+    {value: 'Action', label: 'Action'},
+    {value: 'Family', label: 'Family'},
+]

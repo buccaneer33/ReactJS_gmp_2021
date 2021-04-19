@@ -40,6 +40,7 @@ export interface newMovieCard {
     revenue: number;
     runtime: number;
     genres: string[]
+    token?:string;
 }
 export interface uploadCard {
     title: string;
@@ -52,7 +53,8 @@ export interface uploadCard {
     budget: number;
     revenue: number;
     runtime: number;
-    genres: string[]
+    genres: string[];
+    token?:string;
 }
 
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -61,3 +63,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   AnyAction
 >
+
+export interface InputProps {
+    [x: string]: any;
+    name: string;
+}
