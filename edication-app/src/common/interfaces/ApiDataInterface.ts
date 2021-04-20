@@ -64,7 +64,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   AnyAction
 >
 
-export interface PropsType {
+export interface InputProps {
     [x: string]: any;
     name: string;
 }

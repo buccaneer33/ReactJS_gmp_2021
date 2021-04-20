@@ -4,7 +4,6 @@ export const useStyles = createUseStyles({
     inputItem: {
         height: '75px',
         display: 'flex',
-        flexDirection: 'column',
         padding: '10px'
     },
     inputLabel: {
@@ -19,12 +18,6 @@ export const useStyles = createUseStyles({
         borderRadius: '5px',
         color: '#FFFFFF',
         fontSize: '19px'
-    },
-    dateItem: {
-        height: '75px',
-        display: 'flex',
-        // flexDirection: 'column',
-        padding: '10px'
     },
     fieldError: {
         color: '#F65261'

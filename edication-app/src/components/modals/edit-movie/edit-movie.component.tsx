@@ -5,11 +5,10 @@ import {ModalProps, newMovieCard} from '../../../common/interfaces/ApiDataInterf
 import {useDispatch} from 'react-redux';
 import {editMovie} from '../../../store/actions/editMovie';
 import {Form, FormikProps, Formik, Field, useFormikContext} from 'formik';
-import * as Yup from "yup";
 import {InputField} from '../../fields/inputField/InputField';
 import {SelectField} from '../../fields/selectField/SelectField';
-import {DateField} from '../../fields/dateField/DateField';
 import {genresStub} from '../../../common/static/genresStub';
+import {ValidationSchema} from '../../../common/static/validationSchema';
 
 interface errorsProps {
     id: number;
@@ -18,30 +17,6 @@ interface errorsProps {
 interface EditProps extends ModalProps {
     filmData: newMovieCard
 }
-const ValidationSchema = Yup.object().shape({
-    title: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required'),
-    tagline: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required'),
-    poster_path: Yup.string().url()
-        .required('Required'),
-    release_date: Yup.date()
-        .required('Required'),
-    overview: Yup.string()
-        .min(2, 'Too Short!')
-        .max(500, 'Too Long!')
-        .required('Required'),
-    runtime: Yup.number()
-        .min(5, 'Too Small!')
-        .max(300, 'Too Big!')
-        .required('Required'),
-    genres: Yup.array()
-        .required('Required')
-});
 
 export const EditMovieComponent: React.FC<EditProps> = ({closeModal, filmData}) => {
 
@@ -83,7 +58,7 @@ export const EditMovieComponent: React.FC<EditProps> = ({closeModal, filmData}) 
                     actions.setSubmitting(false);
                 }}>
                 {(props: FormikProps<newMovieCard>) => (
-                    <Form className={classes.modalForm}>
+                    <Form onSubmit={props.handleSubmit} className={classes.modalForm}>
                         <div className={classes.modalContent}>
                             <div className={classes.modalHeader}>
                                 <h2 className={classes.title}>add movie</h2>
@@ -101,7 +76,7 @@ export const EditMovieComponent: React.FC<EditProps> = ({closeModal, filmData}) 
                                     <InputField name="tagline" placeholder="Tagline" type="text" label="Tagline" />
                                 </div>
                                 <div className={classes.inputItem}>
-                                    <DateField name="release_date" placeholder="Release date" type="date" label="Release date" />
+                                    <InputField name="release_date" placeholder="Release date" type="date" label="Release date" />
                                 </div>
                                 <div className={classes.inputItem}>
                                     <InputField name="poster_path" type="text" placeholder="Poster path" label="Poster path" />
