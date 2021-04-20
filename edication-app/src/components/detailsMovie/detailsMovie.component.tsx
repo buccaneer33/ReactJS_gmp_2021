@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useStyles} from './styles';
-import {useSelector} from 'react-redux';
 import {newMovieCard} from '../../common/interfaces/ApiDataInterface';
+import {useDispatch} from 'react-redux';
+import { getMoviesById } from '../../store/actions/getMoviesById';
 
 interface DetailsProps {
     id: number
@@ -10,36 +11,41 @@ interface DetailsProps {
 export const DetailsMovieComponent: React.FC<DetailsProps> = ({id}): JSX.Element => {
     const classes = useStyles();
 
-    const currentFilm: newMovieCard = useSelector((state) => {
-        return (state.films as Array<newMovieCard>).find(movie => movie.id === +id);
-    })
+    const [selectedFilm, setSelected] = useState<newMovieCard>();
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMoviesById(id)).then(result => 
+            setSelected(result)
+        );
+    }, [id, dispatch])
 
     return (<>
-        {currentFilm && 
+        {selectedFilm &&
             (<div className={classes.content}>
                 <div className={classes.logo}>
                     <strong>netflix</strong>roulette
                 </div>
                 <div className={classes.imgBlock}>
-                    <img src={currentFilm.poster_path} alt={currentFilm.title} className={classes.img} />
+                    <img src={selectedFilm.poster_path} alt={selectedFilm.title} className={classes.img} />
                 </div>
                 <div className={classes.contentBlock}>
                     <div className={classes.contentHeaderBlock}>
-                        <h2 className={classes.contentHeader}>{currentFilm.title}</h2>
-                        <span className={classes.rating}>{currentFilm.vote_average}</span>
+                        <h2 className={classes.contentHeader}>{selectedFilm.title}</h2>
+                        <span className={classes.rating}>{selectedFilm.vote_average}</span>
                     </div>
                     <div className={classes.ganreBlock}>
-                        {currentFilm.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
+                        {selectedFilm.genres && selectedFilm.genres.map((ganre, index) => <span key={index}> {ganre} </span>)}
                     </div>
                     <div className={classes.infoBlock}>
-                        <span className={classes.info}>{currentFilm.release_date}</span>
-                        <span className={classes.info}>{currentFilm.runtime} min</span>
+                        <span className={classes.info}>{selectedFilm.release_date}</span>
+                        <span className={classes.info}>{selectedFilm.runtime} min</span>
                     </div>
                     <div className={classes.overviewBlock}>
-                        {currentFilm.overview}
+                        {selectedFilm.overview}
                     </div>
                 </div>
-                <strong>{currentFilm.id}</strong>
+                <strong>{id}</strong>
             </div>)}
     </>);
 }

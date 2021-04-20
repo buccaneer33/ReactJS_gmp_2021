@@ -5,8 +5,7 @@ import {store} from '../store/store';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    useParams
+    Route
 } from "react-router-dom";
 import {Provider, useDispatch} from "react-redux";
 import {getMovies} from '../store/actions/getMovies';
@@ -25,22 +24,13 @@ export const App: React.FC = () => {
         dispatch(getMovies([]));
     }, [dispatch])
 
-    const Details = () => {
-        const {id} = useParams();
-        return (<MovieDetailsComponent id={id}/>);
-    }
-    const Search = () => {
-        const {slug} = useParams();
-        return (<NoMoviesFoundComponent searchString={slug} />);
-      }
-
     return (
         <div className={classes.AppComponent}>
             <Provider store={store}>
                 <Router>
                     <Switch>
-                        <Route path={`/film/:id`} component={Details} />
-                        <Route path={`/search/:slug`} component={Search} />
+                        <Route exact path="/film/:id" component={MovieDetailsComponent} />
+                        <Route path="/search/:searchString" component={HomeComponent} />
                         <Route exact path="/" component={HomeComponent} />
                         <Route path="*" component={Page404Component} />
                     </Switch>

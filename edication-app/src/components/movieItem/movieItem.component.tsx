@@ -46,7 +46,7 @@ export const MovieItemComponent: React.FC<MovieProps> = ({movieCard}): JSX.Eleme
                         <button onClick={() => setDelState(true)} className={classes.menuButton}>delete movie</button>
                     </div>
                 }
-                <NavLink className={classes.movieLink} to={location => ({ ...location, pathname: `/film/${id}` })}>
+                <NavLink className={classes.movieLink} to={`/film/${id}`}>
                     <img className={classes.movieImg} alt={movieCard.title} src={movieCard.poster_path} />
                 </NavLink>
                 <div className={classes.titleBlock}>

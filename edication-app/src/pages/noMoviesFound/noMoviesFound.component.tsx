@@ -4,16 +4,15 @@ import {useDispatch} from "react-redux";
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import type { RootState } from '../../store/store'
 import {getMovies} from '../../store/actions/getMovies';
+import {useParams} from "react-router-dom";
 
 import {HeaderComponent} from '../../components/header/header.component';
 import {MoviesComponent} from '../../components/movies/movies.component';
 import {FooterComponent} from '../../components/footer/footer.component';
 
-interface PageProps {
-    searchString: string;
-}
+export const NoMoviesFoundComponent: React.FC = (): JSX.Element => {
 
-export const NoMoviesFoundComponent: React.FC<PageProps> = ({searchString}): JSX.Element => {
+    const {searchString} = useParams<string>();
 
     const classes = useStyles();
     const dispatch = useDispatch();
