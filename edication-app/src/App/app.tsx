@@ -10,7 +10,6 @@ import {
 import {Provider, useDispatch} from "react-redux";
 import {getMovies} from '../store/actions/getMovies';
 import {HomeComponent} from '../pages/home/home.component';
-import {NoMoviesFoundComponent} from '../pages/noMoviesFound/noMoviesFound.component';
 import {MovieDetailsComponent} from '../pages/movieDetails/movieDetails.component';
 import {Page404Component} from '../pages/404/404';
 

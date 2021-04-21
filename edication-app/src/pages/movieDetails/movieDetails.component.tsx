@@ -8,8 +8,8 @@ import {
 import {MoviesComponent} from '../../components/movies/movies.component';
 import {FooterComponent} from '../../components/footer/footer.component';
 import {DetailsMovieComponent} from '../../components/detailsMovie/detailsMovie.component';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import type { RootState } from '../../store/store'
+import {useSelector} from 'react-redux';
+import {useAppSelector} from '../../common/hooks/hooks';
 
 interface PageProps {
     id: number;
@@ -21,7 +21,7 @@ export const MovieDetailsComponent: React.FC<PageProps> = (): JSX.Element => {
 
     const classes = useStyles();
 
-    const films: TypedUseSelectorHook<RootState> = useSelector(state => state.films)
+    const films: typeof useAppSelector = useSelector(state => state.films);
 
     return (<>{
         <div className={classes.detailsPage}>

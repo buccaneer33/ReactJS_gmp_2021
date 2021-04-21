@@ -1,6 +1,5 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {rootReducer}  from './redicers/reducers';
-import { compose } from 'redux';
 import thunk from 'redux-thunk';
 
 
@@ -14,6 +13,7 @@ export const store = createStore(
 );
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch
 
 store.subscribe(() => {
     localStorage.setItem('reduxState', JSON.stringify(store.getState()));
