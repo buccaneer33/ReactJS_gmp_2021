@@ -10,8 +10,8 @@ interface ParamsProps {
 
 export function getMovies (param: ParamsProps[]): AppThunk {
 
-    let URL = baseURL + (param.length ? '?' : '');
-    URL += param.map(param => {return param.value ? param.param + '=' + param.value: ''});
+    const reqParam = param.map(param => {return param.value ? param.param + '=' + param.value: ''});
+    const URL = baseURL + (param.length ? '?' : '') + reqParam.join('&');
 
     return (
         (dispatch) => (

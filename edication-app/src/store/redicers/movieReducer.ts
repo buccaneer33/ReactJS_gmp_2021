@@ -14,6 +14,8 @@ export const movieReducer: Reducer = (state = initialState, action: AnyAction): 
             return action.payload;
         case ACTIONS.GET_MOVIES: 
             return action.payload;
+        case ACTIONS.GET_MOVES_BY_ID: 
+            return action.payload;
         default: 
             return state;
     }

@@ -26,5 +26,12 @@ export const useStyles = createUseStyles({
         boxSizing: 'border-box',
         flexWrap: 'wrap',
         paddingTop: '25px'
+    },
+    noFoundBlock: {
+        height: '100%',
+        width: '100%'
+    },
+    noFoundHeader: {
+        color: 'white'
     }
 });
