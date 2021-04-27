@@ -1,4 +1,4 @@
-import { MovieCard } from '../common/interfaces/ApiDataInterface';
+import {MovieCard} from '../common/interfaces/ApiDataInterface';
 export const moviePreviewStub: MovieCard[] = [
     {
         id: 1,

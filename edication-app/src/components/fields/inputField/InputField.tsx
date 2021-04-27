@@ -8,10 +8,11 @@ export const InputField: React.FC<InputProps> = ({ label, ...props }): JSX.Eleme
 
     const classes = useStyles();
     const [field, meta, name, ] = useField(props);
+
     return (
       <>
-        <label className={classes.inputLabel}>{label}</label>
-        <input name={name} className={classes.inputItem} {...field} {...props} />
+        <label htmlFor={props.name} className={classes.inputLabel}>{label}</label>
+        <input id={props.name} name={name} className={classes.inputItem} {...field} {...props} />
         <ErrorField meta={meta}/>
       </>
     );

@@ -5,7 +5,25 @@
     "scripts": {
         "build:prod": "webpack --mode production",
         "build:dev": "webpack --mode development",
-        "build:watch": "webpack serve --mode development"
+        "build:watch": "webpack serve --mode development",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cover": "jest  --env=jsdom --coverage"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "jsx",
+            "ts",
+            "tsx"
+        ],
+        "moduleDirectories": [
+            "node_modules"
+        ],
+        "moduleNameMapper": {
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+            "\\.(css|less|tsx)$": "identity-obj-proxy"
+        }
     },
     "eslintConfig": {
         "extends": [
@@ -40,13 +58,21 @@
         "redux": "^4.0.5"
     },
     "devDependencies": {
-        "@babel/core": "7.12.3",
+        "@babel/core": "^7.12.3",
+        "@babel/preset-env": "^7.13.15",
+        "@babel/preset-typescript": "^7.13.0",
+        "@testing-library/dom": "^7.30.4",
+        "@testing-library/jest-dom": "^5.12.0",
+        "@testing-library/react": "^11.2.6",
+        "@testing-library/user-event": "^13.1.5",
+        "@types/jest": "^26.0.22",
         "@types/node": "^12.19.16",
         "@types/react": "^17.0.1",
         "@types/react-dom": "^17.0.0",
         "@typescript-eslint/eslint-plugin": "^4.15.2",
         "@typescript-eslint/parser": "^4.15.2",
         "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.6.3",
         "babel-loader": "^8.1.0",
         "babel-plugin-named-asset-import": "^0.3.7",
         "babel-preset-react-app": "^10.0.0",
@@ -65,6 +91,9 @@
         "file-loader": "6.1.1",
         "formik": "^2.2.6",
         "html-webpack-plugin": "^4.5.0",
+        "identity-obj-proxy": "^3.0.0",
+        "isomorphic-fetch": "^3.0.0",
+        "jest": "^26.6.3",
         "lodash": "^4.17.21",
         "mini-css-extract-plugin": "^0.11.3",
         "optimize-css-assets-webpack-plugin": "5.0.4",

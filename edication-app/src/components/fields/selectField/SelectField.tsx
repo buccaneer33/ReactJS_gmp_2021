@@ -33,10 +33,12 @@ export const SelectField: React.JSXElementConstructor<ReactSelectProps & FieldPr
           return isMulti ? [] : ("" as any);
         }
     };
+
     return (
       <>
-        <label className={classes.inputLabel} {...field}>{label}</label>
+        <label htmlFor="react-select-2-input" className={classes.inputLabel} {...field}>{label}</label>
         <Select
+            id={field.name}
             name={field.name}
             value={getValue()}
             isMulti={isMulti}
