@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogoComponent test snapchot component 1`] = `
+<div>
+  <div
+    class="logo-0-2-1"
+  >
+    <strong>
+      netflix
+    </strong>
+    roulette
+  </div>
+</div>
+`;

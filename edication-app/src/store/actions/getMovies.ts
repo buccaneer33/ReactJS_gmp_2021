@@ -21,9 +21,12 @@ export function getMovies (param: ParamsProps[]): AppThunk {
                     method: 'GET',
                     headers: new Headers({ 'content-type': 'application/json' })
                 })
-                .then(response => response.json())
                 .then(response => {
-                    // console.log("filmList: ", response);
+                    console.log("filmList: ", response);
+                    return response.json()
+                })
+                .then(response => {
+                    console.log("filmList: ", response);
                     dispatch({
                         type: ACTIONS.GET_MOVIES,
                         payload: response.data

@@ -85,7 +85,7 @@ export const AddMovieComponent: React.FC<ModalProps> = ({closeModal}) => {
                                     <InputField name="poster_path" type="text" placeholder="Poster path" label="Poster path" />
                                 </div>
                                 <div className={classes.inputItem}>
-                                    <Field name= {'genres'} component={SelectField} options={genresStub} />
+                                    <Field name= 'genres' component={SelectField} options={genresStub} label="Ganres"/>
                                 </div>
                                 <div className={classes.inputItem}>
                                     <InputField name="overview" type="text" placeholder="Owerview here" label="Owerview" />
