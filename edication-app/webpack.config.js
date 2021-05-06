@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require("eslint-webpack-plugin");
 
@@ -14,7 +14,7 @@ module.exports = {
                 use: { loader: 'babel-loader' },
                 exclude: /node_modules/,
             },
-            {
+            /*{
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 use: [
@@ -22,7 +22,7 @@ module.exports = {
                     "css-loader",
                     "sass-loader",
                 ]
-            },
+            },*/
             {test: /\.(ico)$/,
                 use:
                   {
@@ -53,10 +53,10 @@ module.exports = {
         new ESLintPlugin({
             extensions: ["js", "jsx", "ts", "tsx"],
           }),
-        new MiniCssExtractPlugin({
+        /*new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[id].css',
-          }),
+          }),*/
         new HtmlWebpackPlugin({
             scriptLoading: "defer",
             title: 'App',
@@ -64,11 +64,11 @@ module.exports = {
                 'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
               },
             files: {
-                "css": [ "index.css" ],
+                // "css": [ "index.css" ],
                 "js": [ "main.js"],
                 "chunks": {
-                    "head": {"entry": "",  "css": [ "index.css" ]},
-                    "main": {"entry": "main.js", "css": []}
+                    "head": {"entry": ""},
+                    "main": {"entry": "main.js"}
                 },
             },
             minify: {collapseWhitespace: false},

@@ -1,0 +1,30 @@
+.title {
+    color: #FFFFFF;
+    font-size: 40px;
+    margin: 0;
+    text-transform: uppercase;
+    flex-basis: 100%
+}
+.search {
+    flex-basis: 100%
+}
+.searchInput {
+    height: 40px;
+    background-color: rgba(85, 85, 85, 0.5);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    width: 600px;
+    padding: 5px 10px;
+    font-size: 24px
+}
+.button {
+    padding: 10px;
+    color: #FFFFFF;
+    font-size: 24px;
+    background-color: #F65261;
+    text-transform: uppercase;
+    border: 1px solid #F65261;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 5px
+}

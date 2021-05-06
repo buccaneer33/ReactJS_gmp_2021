@@ -7,7 +7,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import {Provider, useDispatch} from "react-redux";
+import {Provider, useDispatch} from 'react-redux';
 import {getMovies} from '../store/actions/getMovies';
 import {HomeComponent} from '../pages/home/home.component';
 import {MovieDetailsComponent} from '../pages/movieDetails/movieDetails.component';
